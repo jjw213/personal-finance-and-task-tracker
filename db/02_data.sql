@@ -20,3 +20,8 @@ INSERT INTO transactions (amount, description, transaction_date, type, user_id, 
 (200.00, 'Movie tickets', DATE '2026-11-04', 'expense', 1, 3),
 (1500.00, 'Freelance work payment', DATE '2026-11-02', 'income', 2, 4),
 (1200.00, 'Monthly rent', DATE '2026-11-01', 'expense', 2, 5);
+
+INSERT INTO budgets (user_id, category_id, amount, start_date, end_date) VALUES 
+(1, 2, 300.00, DATE '2026-11-01', DATE '2026-11-30'),
+(1, 3, 150.00, DATE '2026-11-01', DATE '2026-11-30'),
+(2, 5, 1500.00, DATE '2026-11-01', DATE '2026-11-30');

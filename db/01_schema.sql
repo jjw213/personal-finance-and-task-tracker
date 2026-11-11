@@ -39,7 +39,29 @@ CREATE TABLE transactions (
     FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
 
+CREATE TABLE budgets (
+    budget_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id NUMBER NOT NULL,
+    category_id NUMBER NOT NULL,
+    amount NUMBER(10, 2) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
+);
+
+CREATE TABLE audit_logs (
+    log_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id NUMBER,
+    action VARCHAR2(50),
+    table_name VARCHAR2(50),
+    description VARCHAR2(200),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE INDEX idx_tasks_user_id ON tasks(user_id);
 CREATE INDEX idx_tasks_start_date ON tasks(start_date);
 CREATE INDEX idx_transactions_user_id ON transactions(user_id);
 CREATE INDEX idx_transactions_date ON transactions(transaction_date);
+CREATE INDEX idx_budgets_user_category ON budgets(user_id, category_id);
+CREATE INDEX idx_audit_logs_user_date ON audit_logs(user_id, created_at);
